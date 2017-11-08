@@ -11,7 +11,23 @@ botaoAdicionar.addEventListener("click", function(){
 
     //criando o a tr
     var pacienteTr = montaTr(paciente);
-    
+
+    //adicionando mensagem de erro
+    var erros = validaPaciente(paciente);
+
+    if(erros.length > 0){
+        exibeMensagensErro(erros);
+
+        //mostra mensagem na tag span
+        //var mensagemErro = document.querySelector("#mensagem-erro");
+        //mensagemErro.textContent = erro;
+        //se o paciente for invalido fazemos com que a mensagem seja exibida
+        //porem o paciente nao seja adicionado na tabela, por isso damos um return vazio assim ele sai da funcao
+        return;
+    }
+
+
+
 
     //adiciona paciente na tabela
     var tabela = document.querySelector("#tabela-pacientes");
@@ -19,6 +35,10 @@ botaoAdicionar.addEventListener("click", function(){
 
     //limpa os dados do form
     form.reset();
+
+    //limpando a ul de erro
+    var ul = document.querySelector("#mensagens-erro");
+    ul.innerHTML = "";
 });
 
 
@@ -66,3 +86,56 @@ function montaTd(dado, classe){
 
     return td;
 }
+
+//essa funcao vai testar as propriedades do paciente sao validas
+function validaPaciente(paciente){
+
+    //criando array de erros
+    var erros = [];
+
+    if (paciente.nome.length == 0){
+        erros.push("O nome não pode ser vazio");
+    }
+
+    if (!validaPeso(paciente.peso)) {
+        //adiciona no array
+        erros.push("Peso é inválido"); 
+    }
+
+    //o js tb entende ifs simples quando colocamos tudo em uma unica linha, então para economizar linha podemos fazer o seguinte
+    if (!validaAltura(paciente.altura)) erros.push("Altura é inválida");
+
+    if(paciente.gordura.length == 0){
+        erros.push("Gordura não pode ser vazia");
+    }
+
+    if(paciente.peso.length == 0){
+        erros.push("Peso não pode ser em branco");
+    }
+
+    if(paciente.altura.length == 0){
+        erros.push("Altura não pode ser em branco");
+    }
+
+
+    return erros;
+
+}
+
+function exibeMensagensErro(erros){
+    var ul = document.querySelector("#mensagens-erro");
+
+    //controla o html interno
+    //isso faz com que fiquem aparecendo trocentas mensagens de erro
+    ul.innerHTML = "";
+
+    //foreach ele ja sabe qual o tamanho
+    // para cada item do array vc vai passar 1 parametro que no caso nomeamos de erro
+    erros.forEach(function(erro){
+        var li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
+
+}
+
