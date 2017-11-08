@@ -39,57 +39,15 @@ for (var i=0; i < pacientes.length; i++){
     }
     
     if (alturaValida && pesoValido) {
-        var imc = peso / (altura * altura); // 100 / (2.0 * 2.0) = 25
-        tdImc.textContent = imc.toFixed(2);    
+        var imc = calculaImc(peso, altura); // 100 / (2.0 * 2.0) = 25
     }
         
 }
 
-var botaoAdicionar = document.querySelector("#adicionar-paciente");
-botaoAdicionar.addEventListener("click", function(){
-    event.preventDefault(); // previne os comportamentos padrões dos usuarios no browser
-    
-    //pegando o form do html para o js
-    var form = document.querySelector("#form-adiciona");
 
-    //acesso aos inputs através do name form.altura (vai mostrar o name do campo que for igual a altura)
-    // para pegar o value vc faz form.altura.value
-    
-    var nome = form.nome.value;
-    var peso = form.peso.value;
-    var altura = form.altura.value;
-    var gordura = form.gordura.value;
+function calculaImc(peso, altura){
+    var imc = 0;
+    imc = peso / (altura * altura);
 
-    //criando a tr
-    var pacienteTr =  document.createElement("tr");
-
-    //criando td
-    var pesoTd = document.createElement("td");
-    pesoTd.textContent = peso;
-
-    var nomeTd = document.createElement("td");
-    nomeTd.textContent = nome;
-    
-    var alturaTd = document.createElement("td");
-    alturaTd.textContent = altura;
-    
-    var gorduraTd = document.createElement("td");
-    gorduraTd.textContent = gordura;
-    
-    var imcTd = document.createElement("td");
-
-
-    //adicionando os filhos (td) dentro da tr(pai)
-    pacienteTr.appendChild(nomeTd);
-    pacienteTr.appendChild(pesoTd);
-    pacienteTr.appendChild(alturaTd);
-    pacienteTr.appendChild(gorduraTd);
-    
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
-
-    
-
-
-});
-
+    return imc.toFixed(2);
+}
