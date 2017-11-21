@@ -9,8 +9,7 @@ botaoAdicionar.addEventListener("click", function(){
     //criando o paciente
     var paciente = obtemPacienteDoFormulario(form);
 
-    //criando o a tr
-    var pacienteTr = montaTr(paciente);
+    
 
     //adicionando mensagem de erro
     var erros = validaPaciente(paciente);
@@ -25,13 +24,10 @@ botaoAdicionar.addEventListener("click", function(){
         //porem o paciente nao seja adicionado na tabela, por isso damos um return vazio assim ele sai da funcao
         return;
     }
-
-
-
-
-    //adiciona paciente na tabela
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
+    
+    //adiciona o paciente
+    adicionaPacienteNaTabela(paciente);
+    
 
     //limpa os dados do form
     form.reset();
@@ -41,6 +37,14 @@ botaoAdicionar.addEventListener("click", function(){
     ul.innerHTML = "";
 });
 
+
+function adicionaPacienteNaTabela(paciente) {
+    //criando o a tr
+    var pacienteTr = montaTr(paciente);
+    //adiciona paciente na tabela
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
 
 function obtemPacienteDoFormulario(form){
 
