@@ -10,21 +10,25 @@ Estudos do curso JavaScript: Programando na linguagem Web
 
      
      a) Instalar o npm
+
         ```
          npm install
         ```
      
      b) Rodar o  npm i -g http-server dentro da pasta www
+
         ```
          npm i -g http-server
         ```
      
      c) Ou 
+
         ```
         npm i -g browser-sync
         ```
      
      d) Para subir o server acessar a pasta o projto e rodar o comando: 
+     
          ```
         browser-sync start --server --directory
          ```
